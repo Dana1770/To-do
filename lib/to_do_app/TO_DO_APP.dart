@@ -23,7 +23,7 @@ var titleController=TextEditingController();
 
     // TODO: implement build
     return BlocProvider(
-      create: (BuildContext context)=>AppCubit()..CreateDB(),
+      create: (context)=>AppCubit()..CreateDB(),
       child: BlocConsumer<AppCubit,AppStates>(
         listener: (context,state){
           if(state is AppInsertDBstate) {
@@ -36,7 +36,94 @@ var titleController=TextEditingController();
            return Scaffold(
              key: ScaffoldKey,
 
-          appBar: AppBar(
+drawer:  Drawer(
+           child: Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+           child: Column(
+           mainAxisAlignment: MainAxisAlignment.start,
+           children: [
+           CircleAvatar(
+           radius: 40,
+          child: Image(
+          image: AssetImage(
+           "assets/Man1.png",
+           ),
+          fit: BoxFit.fill,
+           ),
+          ),
+         SizedBox(
+          height: 30,
+           ),
+          Row(
+           children: [
+           Padding(
+         padding: const EdgeInsets.only(left: 8.0),
+         child: Icon(
+           Icons.task,
+           color: Colors.amber[800],
+           ),
+        ),
+          TextButton(
+           onPressed: () {
+           AppCubit.get(context).ChangeIndex(0);
+           Navigator.pop(context);
+          },
+           child: Text(
+           "Tasks",
+          style: TextStyle(fontSize: 20, color: Colors.black),
+           )),
+           ],
+           ),
+           SizedBox(
+           height: 30,
+          ),
+          Row(
+          children: [
+       Padding(
+         padding: const EdgeInsets.only(left: 8.0),
+           child: Icon(
+           Icons.done_all,
+          color: Colors.amber[800],
+           ),
+          ),
+        TextButton(
+          onPressed: () {
+         AppCubit.get(context).ChangeIndex(1);
+           Navigator.pop(context);
+           },
+           child: const Text(
+           "Done Tasks",
+           style: TextStyle(fontSize: 20, color: Colors.black),
+   )),
+        ],
+         ),
+          const SizedBox(
+           height: 30,
+         ),
+          Row(
+         children: [
+           Padding(
+           padding: const EdgeInsets.only(left: 8.0),
+           child: Icon(
+           Icons.archive,
+          color: Colors.amber[800],
+           ),
+          ),
+         TextButton(
+           onPressed: () {
+           AppCubit.get(context).ChangeIndex(2);
+         Navigator.pop(context);
+     },
+           child: Text(
+           "Archived Tasks",
+         style: TextStyle(fontSize: 20, color: Colors.black),
+       )),
+       ],
+         ),
+          ],
+          ),
+           ),
+          ),          appBar: AppBar(
             backgroundColor: Colors.amber[800],
             title: Text(C.titles[AppCubit.get(context).current_Index],style: TextStyle(
               fontWeight: FontWeight.bold
